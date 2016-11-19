@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>Demo_Employee_Grid</name>
+        <uuid>_a-0000dd0b-90ea-8000-9ccd-01ef9001ef90_29256</uuid>
+        <description>paging grid of Employee</description>
+        <parentUuid>_a-0000dd0b-90ea-8000-9ccd-01ef9001ef90_29193</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>load(
+  local!pagingInfo: #&quot;SYSTEM_SYSRULES_pagingInfo&quot;(
+    startIndex: 1,
+    batchSize: - 1
+  ),
+  local!data: #&quot;2cd4e6c3-ae30-4880-bd36-4bbf8e03ad78&quot;(),
+  with(
+    local!dataSubset: todatasubset(
+      local!pagingInfo,
+      local!data
+    ),
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label: &quot;Employee Details&quot;,
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_gridField&quot;(
+          instructions: &quot;Details of the Employees along with the Department and Registerd in the Company Record&quot;,
+          totalCount: local!data.totalCount,
+          columns: {
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+              label: &quot;Id&quot;,
+              field: &quot;Id&quot;,
+              data: index(
+                local!data.data,
+                &quot;Id&quot;,
+                {}
+              ),
+              alignment: &quot;CENTER&quot;
+            ),
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+              label: &quot;Name&quot;,
+              field: &quot;Name&quot;,
+              data: index(
+                local!data.data,
+                &quot;Name&quot;,
+                {}
+              ),
+              alignment: &quot;CENTER&quot;
+            ),
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+              label: &quot;Department&quot;,
+              field: &quot;Department&quot;,
+              data: index(
+                local!data.data,
+                &quot;Department&quot;,
+                {}
+              ),
+              alignment: &quot;CENTER&quot;
+            ),
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+              label: &quot;Mobile&quot;,
+              field: &quot;Mobile&quot;,
+              data: index(
+                local!data.data,
+                &quot;Mobile&quot;,
+                {}
+              ),
+              alignment: &quot;CENTER&quot;
+            )
+          },
+          value: local!pagingInfo,
+          saveInto: local!pagingInfo,
+          identifiers : local!data.identifiers
+        )
+      }
+    )
+  )
+)</definition>
+        <namedTypedValue>
+            <name>cancel</name>
+            <type>
+                <name>boolean</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

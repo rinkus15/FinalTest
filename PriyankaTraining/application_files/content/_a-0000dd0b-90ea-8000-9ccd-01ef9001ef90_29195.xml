@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>Demo_CreateEemployee</name>
+        <uuid>_a-0000dd0b-90ea-8000-9ccd-01ef9001ef90_29195</uuid>
+        <description>form for employee registration</description>
+        <parentUuid>_a-0000dd0b-90ea-8000-9ccd-01ef9001ef90_29193</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>= #&quot;SYSTEM_SYSRULES_formLayout&quot;(
+  label: &quot;Create Employee Form  &quot;,
+  instructions: &quot;Fill the details to complete the employee registration&quot;,
+  firstColumnContents: {
+    #&quot;SYSTEM_SYSRULES_textField&quot;(
+      label: &quot;Name&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      value: ri!user.Name,
+      saveInto: ri!user.Name,
+      required: true,
+      requiredMessage: &quot;Enter a valid Name&quot;,
+      validations: {
+        if(
+          length(
+            ri!user.Name
+          ) &gt; 50,
+          &quot;Please enter valid name&quot;,
+          {}
+        )
+      }
+    ),
+    #&quot;SYSTEM_SYSRULES_dropdownField&quot;(
+      label: &quot;Department&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      choiceLabels: #&quot;_a-0000dd0b-90ea-8000-9ccd-01ef9001ef90_29194&quot;,
+      choiceValues: {#&quot;_a-0000dd0b-90ea-8000-9ccd-01ef9001ef90_29194&quot;},
+      value: ri!user.Department,
+      saveInto: ri!user.Department,
+      placeholderLabel: &quot;--SELECT--&quot;,
+      required: true,
+      requiredMessage: &quot;Select one department&quot;
+    ),
+    #&quot;SYSTEM_SYSRULES_integerField&quot;(
+      label: &quot;Mobile&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      value: ri!user.Mobile,
+      saveInto: ri!user.Mobile,
+      required: true,
+      requiredMessage: &quot;Enter a valid Number&quot;,
+      validations: {}
+    )
+  },
+  secondColumnContents: {
+    /* Add components here for a two-column form */
+    
+  },
+  buttons: #&quot;SYSTEM_SYSRULES_ButtonLayout&quot;(
+    primaryButtons: {
+      if(ri!isUpdate,
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Update&quot;,
+        style: &quot;PRIMARY&quot;,
+        value : &quot;UPDATE&quot;,
+        saveInto: ri!button
+      ),
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Submit&quot;,
+        style: &quot;PRIMARY&quot;,
+        value : &quot;SUBMIT&quot;,
+        saveInto: ri!button
+      )
+      )
+    },
+    secondaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Cancel&quot;,
+        style: &quot;NORMAL&quot;,
+        value: &quot;CANCEL&quot;,
+        saveInto: ri!button,
+        skipValidation: true
+      )
+    }
+  ),
+  validations: {}
+)</definition>
+        <namedTypedValue>
+            <name>button</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>user</name>
+            <type>
+                <name>DEMO_Employee</name>
+                <namespace>urn:com:appian:types</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>isUpdate</name>
+            <type>
+                <name>boolean</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig?list</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <el>
+                <a:name/>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+                    <a:nameRef>button</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:n1="urn:com:appian:types" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="n1:DEMO_Employee"/>
+                    <a:nameRef>user</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="xsd:boolean"/>
+                    <a:nameRef>isUpdate</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:assertions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </el>
+        </value>
+    </typedValue>
+</contentHaul>

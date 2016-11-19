@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataStoreHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <dataStore>
+        <uuid>_a-0000dd0b-90ea-8000-9ccd-01ef9001ef90_29191</uuid>
+        <name>Demo_DS_Employee</name>
+        <description>datastore of employee table</description>
+        <dataSourceKey>jdbc/ExcelMSSqlDS</dataSourceKey>
+        <adaptingExplicitSqlNames>false</adaptingExplicitSqlNames>
+        <autoUpdateSchema>false</autoUpdateSchema>
+        <entities>
+            <entity>
+                <uuid>13943842-1713-4f4a-8ce9-644c32f4fff8</uuid>
+                <name>Demo_Employee</name>
+                <type>{urn:com:appian:types}DEMO_Employee</type>
+            </entity>
+            <entity>
+                <uuid>88cf5bdd-4949-4c1e-a92a-6707b0e91260</uuid>
+                <name>DDA_Employee</name>
+                <type>{urn:com:appian:types:DDA}DDA_Emoployee</type>
+            </entity>
+            <entity>
+                <uuid>b4393813-cfa1-4b58-bab2-f43bb42f627a</uuid>
+                <name>Demo_URI</name>
+                <type>{urn:com:appian:types}Demo_URl</type>
+            </entity>
+            <entity>
+                <uuid>272bfbd7-ba00-4860-9b1b-f9cc7e17d74c</uuid>
+                <name>DS_Documnet</name>
+                <type>{urn:com:appian:types}Document</type>
+            </entity>
+            <entity>
+                <uuid>4a0fdebd-f0d7-41f9-9320-0c6149c374ac</uuid>
+                <name>Demo_User</name>
+                <type>{urn:com:appian:types}Demo_User</type>
+            </entity>
+        </entities>
+    </dataStore>
+    <isPublished>true</isPublished>
+    <roleMap>
+        <role allowForAll="false" inherit="false" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="readers">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</dataStoreHaul>

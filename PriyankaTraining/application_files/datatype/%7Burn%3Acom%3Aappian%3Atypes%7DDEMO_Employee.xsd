@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="urn:com:appian:types"
+  xmlns:tns="urn:com:appian:types" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="DEMO_Employee">
+    <xsd:annotation>
+      <xsd:appinfo source="appian.jpa">
+                @Table(name="DEMO_Employee")
+            </xsd:appinfo>
+      <xsd:documentation><![CDATA[Contains the note details]]></xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Id" type="xsd:int">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Id @GeneratedValue @Column(name="Id")</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Name" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(name="Name")</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Department" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(name="Department")</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Mobile" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(name="Mobile")</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

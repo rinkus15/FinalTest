@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>Demo_EmployeeDetails_GridLayout</name>
+        <uuid>_a-0000dd0b-90ea-8000-9ccd-01ef9001ef90_29333</uuid>
+        <description></description>
+        <parentUuid>_a-0000dd0b-90ea-8000-9ccd-01ef9001ef90_29193</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=#&quot;SYSTEM_SYSRULES_gridRowLayout&quot;(&#xD;
+  id: ri!index,&#xD;
+  contents: {&#xD;
+    #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+      /* Labels are not visible in grid cells but are necessary to meet accessibility requirements */&#xD;
+      label: &quot;summary &quot; &amp; ri!index,&#xD;
+      value: ri!items[ri!index].summary,&#xD;
+      saveInto: ri!items[ri!index].summary,&#xD;
+      required: true&#xD;
+    ),&#xD;
+    #&quot;SYSTEM_SYSRULES_integerField&quot;(&#xD;
+      label: &quot;qty &quot; &amp; ri!index,&#xD;
+      value: ri!items[ri!index].qty,&#xD;
+      saveInto: ri!items[ri!index].qty,&#xD;
+      validations: if(tointeger(ri!items[ri!index].qty) &lt; 1, &quot;Quantity must be greater than 0&quot;, null),&#xD;
+      align: &quot;RIGHT&quot;&#xD;
+    ),&#xD;
+    #&quot;SYSTEM_SYSRULES_floatingPointField&quot;(&#xD;
+      label: &quot;unitPrice &quot; &amp; ri!index,&#xD;
+      value: ri!items[ri!index].unitPrice,&#xD;
+      saveInto: ri!items[ri!index].unitPrice,&#xD;
+      validations: if(todecimal(ri!items[ri!index].unitPrice) &lt; 1, &quot;Unit price must be greater than 0&quot;, null),&#xD;
+      align: &quot;RIGHT&quot;&#xD;
+    ),&#xD;
+    #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+      label: &quot;amount &quot; &amp; ri!index,&#xD;
+      value: if(&#xD;
+        or(isnull(ri!items[ri!index].qty), isnull(ri!items[ri!index].unitPrice)),&#xD;
+        null,&#xD;
+        dollar(tointeger(ri!items[ri!index].qty) * todecimal(ri!items[ri!index].unitPrice))&#xD;
+      ),&#xD;
+      readOnly: true,&#xD;
+      align: &quot;RIGHT&quot;&#xD;
+    ),&#xD;
+    #&quot;SYSTEM_SYSRULES_dropdownField&quot;(&#xD;
+      label: &quot;dept &quot; &amp; ri!index,&#xD;
+      choiceLabels: {&quot;Finance&quot;, &quot;Sales&quot;},&#xD;
+      placeholderLabel: &quot;--Select-- &quot;,&#xD;
+      choiceValues: {&quot;Finance&quot;, &quot;Sales&quot;},&#xD;
+      value: ri!items[ri!index].dept,&#xD;
+      saveInto: ri!items[ri!index].dept&#xD;
+    ),&#xD;
+    #&quot;SYSTEM_SYSRULES_dateField&quot;(&#xD;
+      label: &quot;due &quot; &amp; ri!index,&#xD;
+      value: ri!items[ri!index].due,&#xD;
+      saveInto: ri!items[ri!index].due,&#xD;
+      validations: if(todate(ri!items[ri!index].due) &lt; today(), &quot;The due date cannot be in the past&quot;, null),&#xD;
+      align: &quot;RIGHT&quot;&#xD;
+    ),&#xD;
+    #&quot;SYSTEM_SYSRULES_imageField&quot;(&#xD;
+      label: &quot;delete &quot; &amp; ri!index,&#xD;
+      images: #&quot;SYSTEM_SYSRULES_documentImage&quot;(&#xD;
+        document: #&quot;SYSTEM_SYSRULES_iconIndicator&quot;(&quot;REMOVE&quot;),&#xD;
+        altText: &quot;Remove&quot;,&#xD;
+        caption: &quot;Remove &quot; &amp; ri!items[ri!index].summary,&#xD;
+        link: #&quot;SYSTEM_SYSRULES_dynamicLink&quot;(&#xD;
+          value: ri!index,&#xD;
+          saveInto: {&#xD;
+            a!save(ri!items, remove(ri!items, save!value)),&#xD;
+            /* When modifying the size of the array used in a!applyComponents,  */&#xD;
+            /* make the same change in the &quot;token&quot; array variable               */&#xD;
+            a!save(ri!itemsToken, remove(ri!itemsToken, save!value))&#xD;
+          }&#xD;
+        )&#xD;
+      ),&#xD;
+      size: &quot;ICON&quot;&#xD;
+    )&#xD;
+  }&#xD;
+)</definition>
+        <namedTypedValue>
+            <name>cancel</name>
+            <type>
+                <name>boolean</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

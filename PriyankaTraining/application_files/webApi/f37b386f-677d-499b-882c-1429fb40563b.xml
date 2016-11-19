@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<webApiHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <webApi name="Web API 1" a:uuid="f37b386f-677d-499b-882c-1429fb40563b">
+        <a:description>Test</a:description>
+        <a:expression>with(
+  local!username: if(
+    isnull(
+      http!request.queryParameters.username
+    ),
+    loggedInUser(),
+    http!request.queryParameters.username
+  ),
+  local!user: {
+    firstName: user(
+      local!username,
+      &quot;firstName&quot;
+    ),
+    lastName: user(
+      local!username,
+      &quot;lastName&quot;
+    ),
+    email: user(
+      local!username,
+      &quot;email&quot;
+    ),
+    userTypeName: user(
+      local!username,
+      &quot;userTypeName&quot;
+    ),
+    department: &quot;Appian&quot;,
+    status: user(
+      local!username,
+      &quot;status&quot;
+    )
+  },
+  #&quot;SYSTEM_SYSRULES_httpResponse&quot;(
+    headers: {
+      #&quot;SYSTEM_SYSRULES_httpHeader&quot;(
+        name: &quot;Content-Type&quot;,
+        value: &quot;application/json&quot;
+      )
+    },
+    body: #&quot;SYSTEM_SYSRULES_toJson&quot;(
+      value: local!user
+    )
+  )
+)</a:expression>
+        <a:urlAlias>Terminate</a:urlAlias>
+        <a:httpMethod>GET</a:httpMethod>
+        <a:system>false</a:system>
+    </webApi>
+    <roleMap/>
+    <typedValue>
+        <type>
+            <name>WebApiRequest?list</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <el>
+                <a:path/>
+                <a:queryParameters>
+                    <a:name>username</a:name>
+                    <a:value>priyanka.verma</a:value>
+                </a:queryParameters>
+                <a:body/>
+            </el>
+        </value>
+    </typedValue>
+</webApiHaul>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>Test_HttpQuery</name>
+        <uuid>_a-0000dde1-361a-8000-9ccd-01ef9001ef90_39234</uuid>
+        <description>Interface to test HttpQuery SAIL component</description>
+        <parentUuid>_a-0000dd0b-90ea-8000-9ccd-01ef9001ef90_29193</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>#&quot;SYSTEM_SYSRULES_httpQuery&quot;(
+  url: &quot;http://appiandev.i-connectresources.com/suite/webapi/Terminate&quot;,
+  queryParameters: #&quot;SYSTEM_SYSRULES_httpQueryParameter&quot;(
+    name: &quot;Content-Type&quot;,
+    value: &quot;application/json&quot;
+  ),
+  method: &quot;GET&quot;
+)</definition>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

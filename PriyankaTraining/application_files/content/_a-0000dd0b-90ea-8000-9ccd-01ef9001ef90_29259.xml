@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>Demo_SelectableGrid_Employee</name>
+        <uuid>_a-0000dd0b-90ea-8000-9ccd-01ef9001ef90_29259</uuid>
+        <description>grid with selection option and show the selected id details</description>
+        <parentUuid>_a-0000dd0b-90ea-8000-9ccd-01ef9001ef90_29193</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>load(
+  local!selectedEmployeeId,
+  local!data: #&quot;2cd4e6c3-ae30-4880-bd36-4bbf8e03ad78&quot;().data,
+  local!gridSelection: #&quot;SYSTEM_SYSRULES_gridSelection&quot;(
+    pagingInfo: #&quot;SYSTEM_SYSRULES_pagingInfo&quot;(
+      startIndex: 1,
+      batchSize: - 1
+    )
+  ),
+  with(
+    local!dataSubset: todatasubset(
+      local!data,
+      local!gridSelection.pagingInfo
+    ),
+    #&quot;SYSTEM_SYSRULES_formLayout&quot;(
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+          label: &quot;Employee Details&quot;,
+          firstColumnContents: {
+            #&quot;SYSTEM_SYSRULES_gridField&quot;(
+              label: &quot;Selected Id :&quot;&amp;&quot; &quot;&amp;ri!SelectedId,
+              instruction: &quot;Select the Employee to get the details&quot;,
+              totalCount: local!dataSubset.totalCount,
+              columns: {
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;Id&quot;,
+                  field: &quot;Id&quot;,
+                  data: index(
+                    local!dataSubset.data,
+                    &quot;Id&quot;,
+                    {}
+                  ),
+                  alignment: &quot;CENTER&quot;
+                ),
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;Name&quot;,
+                  field: &quot;Name&quot;,
+                  data: index(
+                    local!dataSubset.data,
+                    &quot;Name&quot;,
+                    {}
+                  ),
+                  alignment: &quot;CENTER&quot;,
+                  links: apply(
+                    #&quot;SYSTEM_SYSRULES_dynamicLink&quot;(
+                      value: _,
+                      saveInto: local!selectedEmployeeId
+                    ),
+                    index(
+                      local!dataSubset.data,
+                      &quot;Id&quot;,
+                      {}
+                    )
+                  )
+                ),
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;Department&quot;,
+                  field: &quot;Department&quot;,
+                  data: index(
+                    local!dataSubset.data,
+                    &quot;Department&quot;,
+                    {}
+                  ),
+                  alignment: &quot;CENTER&quot;
+                ),
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;Mobile&quot;,
+                  field: &quot;Mobile&quot;,
+                  data: index(
+                    local!dataSubset.data,
+                    &quot;Mobile&quot;,
+                    {}
+                  ),
+                  alignment: &quot;CENTER&quot;
+                )
+              },
+              value: local!gridSelection,
+              selection: true,
+              identifiers: index(
+                local!dataSubset.data,
+                &quot;Id&quot;,
+                {}
+              ),
+              requireSelection: true,
+              saveInto: {
+                local!gridSelection,
+                a!save(
+                  ri!SelectedId,
+                  index(
+                    save!value,
+                    &quot;selected&quot;,
+                    null
+                  )
+                )
+              },
+              validations: {
+                if(
+                  count(
+                    tointeger(
+                      ri!SelectedId
+                    )
+                  ) &gt; 1,
+                  &quot;Please select only one Employee.&quot;,
+                  &quot;&quot;
+                )
+              }
+            )
+          }
+        ),
+        if(
+          isnull(
+            local!selectedEmployeeId
+          ),
+          {},
+          with(
+            /*` Replace with your rule to get the employee details */
+            local!selectedEmployee: displayvalue(
+              local!selectedEmployeeId,
+              local!data.Id,
+              local!data,
+              {}
+            ),
+            #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+              label: &quot;Employee Details: &quot; &amp; index(
+                local!selectedEmployee,
+                &quot;Name&quot;,
+                {}
+              ),
+              firstColumnContents: {
+                #&quot;SYSTEM_SYSRULES_textField&quot;(
+                  label: &quot;Name&quot;,
+                  value: index(
+                    local!selectedEmployee,
+                    &quot;Name&quot;,
+                    {}
+                  ),
+                  readOnly: true
+                ),
+                #&quot;SYSTEM_SYSRULES_textField&quot;(
+                  label: &quot;Department&quot;,
+                  value: index(
+                    local!selectedEmployee,
+                    &quot;Department&quot;,
+                    {}
+                  ),
+                  readOnly: true
+                )
+              },
+              secondColumnContents: {
+                #&quot;SYSTEM_SYSRULES_textField&quot;(
+                  label: &quot;Mobile&quot;,
+                  value: index(
+                    local!selectedEmployee,
+                    &quot;Mobile&quot;,
+                    {}
+                  ),
+                  readOnly: true
+                )
+              }
+            )
+          )
+        )
+      }
+    )
+  )
+)</definition>
+        <namedTypedValue>
+            <name>SelectedId</name>
+            <type>
+                <name>Integer?list</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>
